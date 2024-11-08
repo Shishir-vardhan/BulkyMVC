@@ -1,0 +1,43 @@
+﻿@page
+@model BulkyWebRazor_Temp.Pages.Categories.IndexModel
+
+<div class="container">
+	<div class="row pt-4 pb-2">
+		<div class="col-6">
+			<h2 class="text-primary">Category List</h2>
+		</div>
+		<div class="col-6 text-end">
+			<a asp-page="/categories/create" class="btn btn-primary text-end"><i class="bi bi-plus-square-fill"> Create New Category</i></a>
+		</div>
+	</div>
+</div>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>DisplayOrder</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var obj in Model.CategoryList.OrderBy(u => u.DisplayOrder))
+		{
+			<tr>
+				<td>@obj.Name</td>
+				<td>@obj.DisplayOrder</td>
+				<!-- Creating edit button. When you click on edit it'll redirect to Edit view page-->
+				<!--asp-route-id is used to route to Edit view page once you click on Edit button -->
+				<td>
+					<div class="w-75 btn-group" role="group">
+						<a asp-page="/categories/edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Edit</a>
+					</div>
+				</td>
+				<!-- Creating delete button. When you click on edit it'll redirect to delete view page-->
+				<td>
+					<div class="w-75 btn-group" role="group">
+						<a asp-page="/categories/delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2"><i class="bi bi-trash3"></i> Delete</a>
+					</div>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
